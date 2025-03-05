@@ -1,10 +1,9 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
-  projectId: 'chwf4e',
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
-  },
+    specPattern: 'cypress/integration/**/*.spec.js',
+    supportFile: false,  // Desactiva el archivo de soporte
+
+  }
 });

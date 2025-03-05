@@ -67,8 +67,8 @@ jobs:
       run: npm install cypress
 
     - name: Run Cypress tests
-      run: npx cypress run
-
+      run: npm run cypress:run
+      
   deploy-to-production:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  
