@@ -67,8 +67,8 @@ jobs:
       run: npm install cypress
 
     - name: Run Cypress tests
-      run: npm run cypress:run
-      
+      run: npx cypress run   # Asegúrate de usar el comando correcto si no tienes un script cypress:run en package.json
+
   deploy-to-production:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  
@@ -92,4 +92,4 @@ jobs:
     - name: Deploy to Vercel (or any other platform)
       run: npm run deploy
       # env:
-        # VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      #   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
