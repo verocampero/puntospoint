@@ -59,13 +59,9 @@ jobs:
       - name: Run Cypress tests
         run: npm run test:e2e 
 
-<<<<<<< Updated upstream
-    - name: Run Cypress tests
-      run: npx cypress run   # Asegúrate de usar el comando correcto si no tienes un script cypress:run en package.json
+    
 
-=======
       
->>>>>>> Stashed changes
   deploy-to-production:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  
