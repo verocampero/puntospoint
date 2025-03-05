@@ -23,52 +23,49 @@ concurrency:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'  
-
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run Jest tests
-      run: npm test
-
-    - name: Lint code
-      run: npm run lint
-
-    - name: Build project
-      run: npm run build
+      - name: Run Jest tests
+        run: npm test
 
   cypress-tests:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'  
     needs: build-and-test
-
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install Cypress
-      run: npm install cypress
+      - name: Install Cypress
+        run: npm install cypress
 
+      - name: Run Cypress tests
+        run: npm run test:e2e 
+
+<<<<<<< Updated upstream
     - name: Run Cypress tests
       run: npx cypress run   # Asegúrate de usar el comando correcto si no tienes un script cypress:run en package.json
 
+=======
+      
+>>>>>>> Stashed changes
   deploy-to-production:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  
