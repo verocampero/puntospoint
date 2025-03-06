@@ -8,11 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test:e2e": "cypress run", 
+    "test:e2e": "cypress run",
     "deploy": "vercel --prod"
-
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
     "next": "12.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -21,7 +24,7 @@
     "preset": "ts-jest",
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/cypress/"  
+      "/cypress/"
     ],
     "testMatch": [
       "**/?(*.)+(spec|test).js?(x)",
