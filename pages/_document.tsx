@@ -1,12 +1,14 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import React from 'react';  // Asegúrate de importar React
+import React from 'react';
+
+
 
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="antialiased">
+      <body className="">
         <Main />
         <NextScript />
       </body>

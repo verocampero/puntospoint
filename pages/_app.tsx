@@ -1,8 +1,15 @@
-import "../styles/globals.css";
+import "../styles/globals.css"; 
 import type { AppProps } from "next/app";
-import React from 'react';  // Asegúrate de importar React
+import Navbar from "../pages/component/Header"; 
+import Header from "../pages/component/NavBar"; 
+import React from "react";
 
-
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Navbar />
+      <Header />
+      <Component {...pageProps} />
+    </>
+  );
 }
