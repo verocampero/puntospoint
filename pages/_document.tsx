@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import React from 'react';
+import Grafic from "./component/Grafic";
 
 
 
