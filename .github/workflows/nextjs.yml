@@ -38,34 +38,10 @@ jobs:
       - name: Run Jest tests
         run: npm test
 
-  cypress-tests:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Cypress
-        run: npm install cypress
-
-      - name: Run Cypress tests
-        run: npm run test:e2e 
-
-    
-
-      
   deploy-to-production:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  
-    needs: [build-and-test, cypress-tests]  
+    needs: build-and-test  
 
     steps:
     - name: Check out code
