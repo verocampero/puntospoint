@@ -36,16 +36,16 @@ test("debe renderizar la tabla correctamente con los datos de la API", async () 
   await waitFor(() => screen.getByText("10:00"));
 
   expect(screen.getByText("10:00")).toBeInTheDocument();
-  expect(screen.getByText("15")).toBeInTheDocument(); // Valor de la columna 1
-  expect(screen.getByText("20")).toBeInTheDocument(); // Valor de la columna 2
-  expect(screen.getByText("30.000")).toBeInTheDocument(); // Valor de la columna 3 (formateado)
-  expect(screen.getByText("60.000")).toBeInTheDocument(); // Total
+  expect(screen.getByText("15")).toBeInTheDocument(); 
+  expect(screen.getByText("20")).toBeInTheDocument(); 
+  expect(screen.getByText("30.000")).toBeInTheDocument(); 
+  expect(screen.getByText("60.000")).toBeInTheDocument(); 
 
   expect(screen.getByText("11:00")).toBeInTheDocument();
-  expect(screen.getByText("15")).toBeInTheDocument(); // Valor de la columna 1
-  expect(screen.getByText("25")).toBeInTheDocument(); // Valor de la columna 2
-  expect(screen.getByText("35.000")).toBeInTheDocument(); // Valor de la columna 3 (formateado)
-  expect(screen.getByText("75.000")).toBeInTheDocument(); // Total
+  expect(screen.getByText("15")).toBeInTheDocument(); 
+  expect(screen.getByText("25")).toBeInTheDocument(); 
+  expect(screen.getByText("35.000")).toBeInTheDocument();
+  expect(screen.getByText("75.000")).toBeInTheDocument(); 
 });
 
 test("muestra mensaje de error si ocurre un problema al cargar los datos", async () => {
@@ -59,6 +59,10 @@ test("muestra mensaje de error si ocurre un problema al cargar los datos", async
       <CustomTable />
     </QueryClientProvider>
   );
-
+  await waitFor(() => {
+    screen.debug(); 
+    expect(screen.getByText(/Error al cargar los datos/i)).toBeInTheDocument();
+  });
+  
 
 });
