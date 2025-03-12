@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -7,72 +7,195 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Line,
 } from "recharts";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Link } from "@mui/material";
+import { useFiltro } from "./FiltroContext";
 import DownloadIcon from "@mui/icons-material/Download";
 
-const fetchGraficoData = async () => {
-  const response = await fetch("/api/datos");
+const fetchGraficoData = async (tiempoFiltro: string, tipoFiltro: string) => {
+  const response = await fetch(
+    `/api/datos?periodo=${tiempoFiltro}&tipo=${tipoFiltro}`
+  );
   if (!response.ok) {
     throw new Error("Error al obtener los datos del gráfico");
   }
-  const data = await response.json();
-  return data.grafico;
+  return response.json();
 };
 
 const DashboardChart: React.FC = () => {
+  const { tiempoFiltro, tipoFiltro } = useFiltro();
+  const [chartData, setChartData] = useState<any[]>([]);
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["grafico"],
-    queryFn: fetchGraficoData,
+    queryKey: ["grafico", tiempoFiltro, tipoFiltro],
+    queryFn: () => fetchGraficoData(tiempoFiltro, tipoFiltro.join(",")),
+    staleTime: 1000 * 60 * 5, // Para evitar nuevas solicitudes por 5 minutos
   });
+  useEffect(() => {
+    if (!data) return;
+
+    let updatedChartData = [];
+
+    switch (true) {
+      case tiempoFiltro === "7D" &&
+        tipoFiltro.includes("Dinero") &&
+        tipoFiltro.includes("Clientes"):
+        updatedChartData = data?.Todo7D?.sieteDias?.map(
+          (dia: any, index: number) => ({
+            dia,
+            clientesNuevos: data?.Todo7D?.clientes_nuevos?.[index] ?? 0,
+            compraron: data?.Todo7D?.compraron?.[index] ?? 0,
+          })
+        );
+        break;
+
+      case tiempoFiltro === "7D" &&
+        tipoFiltro.includes("Cashback") &&
+        tipoFiltro.includes("Clientes"):
+        updatedChartData = data?.Cashback?.sieteDias?.map(
+          (dia: any, index: number) => ({
+            dia,
+            clientesNuevos: data?.Todo7D?.clientes_nuevos?.[index] ?? 0,
+            compraron: data?.Todo7D?.compraron?.[index] ?? 0,
+          })
+        );
+        break;
+
+      case tiempoFiltro === "Hoy" && tipoFiltro.includes("Clientes"):
+        updatedChartData = data?.grafico?.horas?.map(
+          (hora: any, index: number) => ({
+            hora,
+            clientesNuevos: data?.grafico?.clientes_nuevos?.[index] ?? 0,
+            compraron: data?.grafico?.compraron?.[index] ?? 0,
+          })
+        );
+        break;
+
+      case tiempoFiltro === "7D" && tipoFiltro.includes("Clientes"):
+        updatedChartData = data?.grafico7D?.sieteDias?.map(
+          (dia: any, index: number) => ({
+            dia,
+            clientesNuevos: data?.grafico7D?.clientes_nuevos?.[index] ?? 0,
+            compraron: data?.grafico7D?.compraron?.[index] ?? 0,
+          })
+        );
+        break;
+      case tiempoFiltro === "7D" &&
+        tipoFiltro.includes("Transacciones") &&
+        tipoFiltro.includes("Dinero"):
+        updatedChartData = data?.graficoTransacciones?.sieteDias?.map(
+          (dia: any, index: number) => ({
+            dia,
+            transacciones:
+              data?.graficoTransacciones?.transacciones?.[index] ?? 0,
+          })
+        );
+        break;
+
+      default:
+        updatedChartData = [];
+    }
+
+    setChartData(updatedChartData);
+  }, [data, tiempoFiltro, tipoFiltro]);
 
   if (isLoading) return <p>Cargando...</p>;
   if (error instanceof Error)
     return <p>Error al cargar datos: {error.message}</p>;
 
-  console.log(data);
-
-  const chartData = data.horas.map((hora: string, index: number) => ({
-    hora,
-    clientesNuevos: data.clientes_nuevos[index] || 0,
-    compraron: data.compraron[index] || 0,
-  }));
+  const isToday = tiempoFiltro === "Hoy";
+  const isTransactionActive = tipoFiltro.includes("Transacciones");
+  const barColors =
+    tipoFiltro.includes("Dinero") &&
+    tiempoFiltro === "7D" &&
+    tipoFiltro.includes("Clientes")
+      ? { clientesNuevos: "#2DCF5A", compraron: "#358DEB" }
+      : { clientesNuevos: "#FF6B6B", compraron: "#3B82F6" };
 
   return (
     <Box sx={{ textAlign: "center", p: 1, width: "1042px", height: "456px" }}>
-      <ResponsiveContainer width={948} height={320}>
-        <BarChart data={chartData} barSize={60}>
-          <XAxis dataKey="hora" />
+      <ResponsiveContainer width={948} height={420}>
+        <BarChart data={chartData} barSize={20} >
+          <XAxis dataKey={isToday ? "hora" : "dia"} />
           <YAxis
             domain={["dataMin - 10", "dataMax"]}
-            ticks={[0, 5, 8, 10, 20, 40, 60, 80, 100]}
+            ticks={
+              isToday
+                ? [0, 5, 8, 10, 20, 40, 60, 80, 100]
+                : [100, 200, 400, 600, 800, 1000, 1500, 2000, 2500]
+            }
             tickMargin={10}
             interval={0}
           />
+          {isTransactionActive && (
+           <YAxis
+           domain={[500000, 15000000]} // Rango del eje
+           yAxisId="right"
+           orientation="right"
+           tickMargin={10} 
+           interval={0}
+           tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`} 
+           ticks={[500000, 750000, 1000000, 2000000, 4000000, 6000000, 8000000, 10000000, 15000000]}
+         />
+         
+          )}
+
           <Tooltip />
           <Legend />
-          <Bar
-            dataKey="clientesTotales"
-            fill="#EB3535"
-            style={{ opacity: "80%" }}
-            name="Clientes Totales"
+          {!isTransactionActive && (
+            <>
+              <Bar
+                dataKey=""
+                fill={barColors.compraron}
+                name="Clientes Totales"
+              />
+              <Bar
+                dataKey="clientesNuevos"
+                fill={barColors.clientesNuevos}
+                name="Clientes Nuevos"
+              />
+
+              <Bar
+                dataKey="compraron"
+                fill={barColors.compraron}
+                name="Compraron"
+              />
+              <Bar
+                dataKey=""
+                fill={barColors.clientesNuevos}
+                name="No Compraron"
+              />
+            </>
+          )}
+          <Line
+            type="monotone"
+            dataKey="monto"
+            stroke="#D81B60"
+            strokeWidth={2}
+            yAxisId="right"
+            name=""
           />
-          <Bar dataKey="clientesNuevos" fill="#FF6B6B" name="Clientes Nuevos" />
-          <Bar dataKey="compraron" fill="#3B82F6" name="Compraron" />
-          <Bar dataKey="noCompraron" fill="#4CAF50" name="No compraron" />
+          {isTransactionActive && (
+            <Bar
+              dataKey="transacciones"
+              fill={barColors.compraron}
+              name="Transacciones"
+            />
+          )}
         </BarChart>
       </ResponsiveContainer>
       <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
         <Link
           href="/"
           sx={{
-        color: "#644BBA",
-        textDecoration: "none",
-        fontSize: "14px",
-        fontWeight: "bold",
-        display: "flex",
-        alignItems: "center",
+            color: "#644BBA",
+            textDecoration: "none",
+            fontSize: "14px",
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
           }}
         >
           <DownloadIcon sx={{ mr: 1 }} /> Exportar tabla

@@ -43,45 +43,45 @@ export default function handler(req, res) {
       { hora: "16:00 - 20:00", total: 80.085, columnas: [5, 150, 79.935] },
       { hora: "20:00 - 00:00", total: 80.095, columnas: [10, 200, 79.895] },
     ],
+    lineData: {
+      sieteDias: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+      dinero_total: [1000000, 2500000, 2200000, 5000000, 4500000, 11000000, 9500000],
+      ventas: [1200, 2500, 2000, 3500, 4000, 3800, 3200]
+    },
     grafico: {
       horas: [
-        "00:00",
-        "01:00",
-        "02:00",
-        "03:00",
-        "04:00",
-        "05:00",
-        "06:00",
-        "07:00",
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
-        "23:00",
+        "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00",
       ],
-      clientes_nuevos: [
-        5, 5, 8, 0, 5, 5, 10, 20, 5, 0, 4, 0, 5, 10, 10, 5, 5, 0, 0, 0, 2, 2, 3,
-        2,
-      ],
-      compraron: [
-        5, 5, 5, 10, 40, 20, 20, 40, 60, 60, 100, 30, 80, 70, 100, 100, 40, 40,
-        60, 50, 60, 40, 80, 20,
-      ],
-      no_compraron: [
-        2, 1, 3, 2, 4, 6, 5, 2, 3, 4, 5, 3, 2, 4, 3, 5, 6, 4, 2, 1, 2, 3, 2, 1,
-      ],
+      clientes_totales:[0],
+      clientes_nuevos: [5, 5, 8, 0, 5, 5, 10, 20, 5, 0, 4, 0, 5, 10, 10, 5, 5, 0, 0, 0, 2, 2, 3, 2],
+      compraron: [5, 5, 5, 10, 40, 20, 20, 40, 60, 60, 100, 30, 80, 70, 100, 100, 40, 40, 60, 50, 60, 40, 80, 20],
+      no_compraron: [0],
     },
+   grafico7D: {
+      sieteDias: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+      clientes_totales:[0],
+      clientes_nuevos: [205, 210, 210, 200, 200, 250, 250],
+      compraron: [2005, 1010, 1500, 1700, 2300, 1000, 1010],
+      no_compraron: [0]
+    }, 
+    Todo7D: {
+      sieteDias: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+      clientes_totales:[0],
+      clientes_nuevos: [205, 210, 210, 200, 200, 250, 250],
+      compraron: [2005, 1010, 1500, 1700, 2300, 1000, 1010],
+      no_compraron: [0]
+    }, 
+    Cashback: {
+      sieteDias: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+      clientes_totales:[0],
+      clientes_nuevos: [205, 210, 200, 210, 200, 250, 250],
+      compraron: [2005, 1010, 1500, 1700, 2300, 1000, 1010],
+      no_compraron: [0]
+    }, 
+    graficoTransacciones: {
+      sieteDias: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+      transacciones:[1010, 2500, 2000, 3500, 4000, 3800, 3000]
+    }
   };
 
   res.status(200).json(data);

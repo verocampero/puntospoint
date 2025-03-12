@@ -5,12 +5,8 @@ import Button from '@mui/material/Button';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import GradeIcon from '@mui/icons-material/Grade';
+import { useFiltro } from './FiltroContext';
 
-interface Props {
-  window?: () => Window;
-}
-
-const drawerWidth = 240;
 const list = [
   { text: 'Hoy', icon: null },
   { text: '7D', icon: null },
@@ -19,36 +15,30 @@ const list = [
   { text: 'YTD/YTG', icon: null },
   { text: '1A', icon: null },
   { text: 'MÁX', icon: null },
-  { text: 'Personalizado', icon: <EventIcon sx={{ fontSize: 24, color: '#644BBA' }} /> }, // Aquí está el ícono
+  { text: 'Personalizado', icon: <EventIcon sx={{ fontSize: 24, color: '#644BBA' }} /> },
 ];
 
-export default function Header(props: Props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+export default function Header(props: { window?: () => Window }) {
+  const { tiempoFiltro, setTiempoFiltro } = useFiltro();  // Usamos el hook para obtener y actualizar el filtro
   const [activeItem, setActiveItem] = React.useState(list[0]);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
+  // Sincronizamos activeItem con tiempoFiltro cuando el filtro global cambie
+  React.useEffect(() => {
+    const filtroActivo = list.find(item => item.text === tiempoFiltro);
+    if (filtroActivo) {
+      setActiveItem(filtroActivo);
+    }
+  }, [tiempoFiltro]); // Se ejecuta cuando tiempoFiltro cambia
 
   const handleNavClick = (item: { text: string, icon: React.JSX.Element | null }) => {
-    setActiveItem(item);
+    setActiveItem(item);       // Cambia el estado local de activeItem
+    setTiempoFiltro(item.text); // Cambia el filtro global cuando se hace clic
   };
-
-  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <Box
-        sx={{
-          marginTop: '80px',
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '10px',
-          textAlign: 'center',
-        }}
-      >
-        {list.map((item, index) => (  
+      <Box sx={{ marginTop: '80px', display: 'flex', justifyContent: 'center', padding: '10px', textAlign: 'center' }}>
+        {list.map((item, index) => (
           <Button
             key={index}
             sx={{

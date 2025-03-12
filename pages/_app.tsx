@@ -8,34 +8,35 @@ import Grafic from "../pages/component/Grafic";
 import { Box } from "@mui/material";
 import Buttons from "../pages/component/Buttons";
 import Table from "../pages/component/Table";
-import {
-  
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { FiltroProvider } from "../pages/component/FiltroContext";
 
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Navbar />
-      <Header />
+    <FiltroProvider>
+      <QueryClientProvider client={queryClient}>
+        <Navbar />
+        <Header />
 
-      <Box display="flex" flexDirection="row" justifyContent={"center"} alignItems={"center"}>
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Box display="flex" flexDirection="column" marginTop={"100px"}>
+            <Buttons />
+            <Grafic />
+            <Table />
+          </Box>
 
-        <Box display='flex' flexDirection='column'  marginTop={'100px'}>
-          <Buttons />
-          <Grafic />
-          <Table/>
+          <Card />
         </Box>
 
-        <Card />
-
-      </Box>
-
-
-      <Component {...pageProps} />
-    </QueryClientProvider>);
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </FiltroProvider>
+  );
 }
