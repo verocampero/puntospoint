@@ -37,48 +37,8 @@ yarn dev
 
 El servidor estará disponible en `http://localhost:3000`.
 
-### Construcción y producción
 
-Para compilar y ejecutar el proyecto en producción:
-
-```sh
-npm run build
-npm start
-```
-
-## 📁 Estructura del proyecto
-
-```
-📂 tu-proyecto
-├── 📂 components   # Componentes reutilizables
-│   ├── CashbackDashboard.tsx  # Dashboard de cashback
-│   ├── ...
-├── 📂 pages        # Rutas de la aplicación (Next.js)
-│   ├── index.tsx  # Página principal
-│   ├── api/datos.ts # API Mock o conexión con backend
-├── 📂 styles       # Estilos globales
-├── 📂 utils        # Funciones y helpers
-├── next.config.js  # Configuración de Next.js
-├── tsconfig.json   # Configuración de TypeScript
-└── package.json    # Dependencias y scripts
-```
-
-## ⚡ Funcionalidades
-
-- 📊 **Visualización de datos de cashback** organizados por mes.
-- 🚀 **Interfaz optimizada** con **Material UI**.
-- 🔄 **Actualización eficiente de datos** usando React Query.
-- 🎯 **Optimización de renders** con `React.memo` y `useMemo`.
-
-## 🛠 Mejoras futuras
-
-- 🔍 Implementar filtros dinámicos.
-- 📈 Agregar gráficos interactivos.
-- 🔗 Integrar con una API real.
-
----
-
-📌 **Challenge completado por:** _Tu Nombre_  
-📧 Contacto: [tu-email@example.com](mailto:tu-email@example.com)  
+📌 **Challenge completado por:** _Veronica Campero_  
+📧 Contacto: [verocampero2@gmail.com](mailto:tu-email@example.com)  
 🚀 ¡Gracias por revisar este proyecto! 🎉
 
