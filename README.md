@@ -1,41 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Cashback Dashboard
 
-## Getting Started
+Este proyecto es parte de un challenge y consiste en un dashboard de cashback desarrollado con **React y Next.js**, utilizando **Material UI** para el diseño y **React Query** para la gestión de datos asíncronos.
 
-First, run the development server:
+## 🚀 Tecnologías utilizadas
 
-```bash
+- [Next.js](https://nextjs.org/) - Framework de React
+- [React](https://reactjs.org/) - Biblioteca para interfaces de usuario
+- [Material UI](https://mui.com/) - Componentes UI modernos y personalizables
+- [React Query](https://tanstack.com/query/latest) - Manejo eficiente de estado asíncrono
+- [TypeScript](https://www.typescriptlang.org/) - Tipado estático para mayor seguridad
+
+## 📦 Instalación
+
+1. Clona el repositorio:
+   ```sh
+   git clone https://github.com/tu-usuario/tu-repo.git
+   cd tu-repo
+   ```
+
+2. Instala las dependencias:
+   ```sh
+   npm install
+   # o
+   yarn install
+   ```
+
+## ▶️ Ejecución del proyecto
+
+### Modo desarrollo
+
+```sh
 npm run dev
-# or
+# o
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El servidor estará disponible en `http://localhost:3000`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Construcción y producción
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Para compilar y ejecutar el proyecto en producción:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```sh
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Estructura del proyecto
 
-## Learn More
+```
+📂 tu-proyecto
+├── 📂 components   # Componentes reutilizables
+│   ├── CashbackDashboard.tsx  # Dashboard de cashback
+│   ├── ...
+├── 📂 pages        # Rutas de la aplicación (Next.js)
+│   ├── index.tsx  # Página principal
+│   ├── api/datos.ts # API Mock o conexión con backend
+├── 📂 styles       # Estilos globales
+├── 📂 utils        # Funciones y helpers
+├── next.config.js  # Configuración de Next.js
+├── tsconfig.json   # Configuración de TypeScript
+└── package.json    # Dependencias y scripts
+```
 
-To learn more about Next.js, take a look at the following resources:
+## ⚡ Funcionalidades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- 📊 **Visualización de datos de cashback** organizados por mes.
+- 🚀 **Interfaz optimizada** con **Material UI**.
+- 🔄 **Actualización eficiente de datos** usando React Query.
+- 🎯 **Optimización de renders** con `React.memo` y `useMemo`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠 Mejoras futuras
 
-## Deploy on Vercel
+- 🔍 Implementar filtros dinámicos.
+- 📈 Agregar gráficos interactivos.
+- 🔗 Integrar con una API real.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
-# puntospoint
+📌 **Challenge completado por:** _Tu Nombre_  
+📧 Contacto: [tu-email@example.com](mailto:tu-email@example.com)  
+🚀 ¡Gracias por revisar este proyecto! 🎉
+
