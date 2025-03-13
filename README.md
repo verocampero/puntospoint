@@ -4,11 +4,11 @@ Este proyecto es parte de un challenge y consiste en un dashboard de cashback de
 
 ## 🚀 Tecnologías utilizadas
 
-- [Next.js](https://nextjs.org/) - Framework de React
-- [React](https://reactjs.org/) - Biblioteca para interfaces de usuario
-- [Material UI](https://mui.com/) - Componentes UI modernos y personalizables
-- [React Query](https://tanstack.com/query/latest) - Manejo eficiente de estado asíncrono
-- [TypeScript](https://www.typescriptlang.org/) - Tipado estático para mayor seguridad
+- [Next.js](https://nextjs.org/) 
+- [React](https://reactjs.org/) 
+- [Material UI](https://mui.com/) 
+- [React Query](https://tanstack.com/query/latest)
+- [TypeScript](https://www.typescriptlang.org/) 
 
 
 ## Vista Previa 
