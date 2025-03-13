@@ -19,6 +19,9 @@ Este proyecto es parte de un challenge y consiste en un dashboard de cashback de
 ![Captura desde 2025-03-13 14-56-54](https://github.com/user-attachments/assets/bd37adf4-1f30-4d34-902f-1c8ba1e8b31e)
 ![Captura desde 2025-03-13 14-56-48](https://github.com/user-attachments/assets/0305949d-69b4-44de-b2a4-695757a93554)
 
+![Captura desde 2025-03-13 19-15-14](https://github.com/user-attachments/assets/46278572-60c5-4179-ab54-ee1c653c8f36)
+![Captura desde 2025-03-13 19-15-05](https://github.com/user-attachments/assets/dba2094d-76ef-4314-8cd8-7a75195f7261)
+![Captura desde 2025-03-13 19-15-01](https://github.com/user-attachments/assets/ab96f2db-66e7-434c-88e6-5c4aa0a955d9)
 
 
 
