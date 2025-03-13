@@ -1,4 +1,4 @@
-import React from 'react';  // Asegúrate de importar React
+import React from 'react';  
 
 
 

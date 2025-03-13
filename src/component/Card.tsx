@@ -10,8 +10,7 @@ interface Cliente {
   cashback: {
     acumulado: number;
     facturado: number[];
-    fechasFacturacion: string[]; // Definir fechasFacturacion como un array de strings
-
+    fechasFacturacion: string[]; 
   };
 }
 

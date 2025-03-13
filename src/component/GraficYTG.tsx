@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useTheme, useMediaQuery } from "@mui/material";
 import {
   BarChart,
   Bar,
@@ -26,6 +26,9 @@ const YtdYtgChart: React.FC = () => {
     queryFn: fetchData,
   });
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   if (isLoading) return <Typography>Cargando...</Typography>;
   if (error) return <Typography>Error: {error.message}</Typography>;
 
@@ -46,17 +49,16 @@ const YtdYtgChart: React.FC = () => {
   );
 
   return (
-    <Box sx={{ textAlign: "center", width: "1000px", height: "456px" }}>
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-        
-          <ResponsiveContainer width={474} height={420}>
+    <Box sx={{ textAlign: "center", width: "100%", height: "auto", padding: isMobile ? "16px" : "0" }}>
+      <Grid container spacing={isMobile ? 2 : 3}>
+        <Grid item xs={12} md={6}>
+          <ResponsiveContainer width="100%" height={isMobile ? 300 : 420}>
             <BarChart
               data={ytdData}
-              barSize={80}
-              barCategoryGap="30%" 
-              barGap={8} 
-              margin={{ top: 20, right: 20, left: 20, bottom: 5 }} 
+              barSize={isMobile ? 40 : 80}
+              barCategoryGap="30%"
+              barGap={8}
+              margin={{ top: 20, right: 20, left: 20, bottom: 5 }}
             >
               <CartesianGrid
                 horizontal={true}
@@ -64,7 +66,7 @@ const YtdYtgChart: React.FC = () => {
                 stroke="#ccc"
                 strokeDasharray="1 1"
               />
-              <XAxis dataKey="anio" /> 
+              <XAxis dataKey="anio" />
               <YAxis
                 tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
               />
@@ -74,23 +76,20 @@ const YtdYtgChart: React.FC = () => {
                 }
               />
               <Legend />
-              
               <Bar dataKey="valor1" fill="#EB3535" name="2022" />
               <Bar dataKey="valor2" fill="#7A35EB" name="2023" />
             </BarChart>
           </ResponsiveContainer>
         </Grid>
 
-        {/* Gráfico YTG */}
-        <Grid item xs={6}>
-          
-          <ResponsiveContainer width={474} height={420}>
+        <Grid item xs={12} md={6}>
+          <ResponsiveContainer width="100%" height={isMobile ? 300 : 420}>
             <BarChart
               data={ytgData}
-              barSize={80}
-              barCategoryGap="10%" 
-              barGap={8} 
-              margin={{ top: 20, right: 50, left: 0, bottom: 5 }} 
+              barSize={isMobile ? 40 : 80}
+              barCategoryGap="10%"
+              barGap={8}
+              margin={{ top: 20, right: 50, left: 0, bottom: 5 }}
             >
               <CartesianGrid
                 horizontal={true}
@@ -98,7 +97,7 @@ const YtdYtgChart: React.FC = () => {
                 stroke="#ccc"
                 strokeDasharray="1 1"
               />
-              <XAxis dataKey="anio" /> 
+              <XAxis dataKey="anio" />
               <YAxis
                 tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
               />
@@ -108,7 +107,6 @@ const YtdYtgChart: React.FC = () => {
                 }
               />
               <Legend />
-             
               <Bar dataKey="valor1" fill="#EB3535" name="2022" />
               <Bar dataKey="valor2" fill="#7A35EB" name="2023" />
             </BarChart>

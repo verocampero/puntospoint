@@ -11,10 +11,10 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useQuery } from "@tanstack/react-query";
-import { Box, Link } from "@mui/material";
-import { useFiltro } from "./FiltroContext";
+import { Box, Link, useTheme, useMediaQuery } from "@mui/material";
+import { useFiltro } from "../Context/FiltroContext";
 import DownloadIcon from "@mui/icons-material/Download";
-import GraficYTG from "../component/GraficYTG"; 
+import GraficYTG from "./GraficYTG"; 
 
 const fetchGraficoData = async (tiempoFiltro: string, tipoFiltro: string) => {
   const response = await fetch(
@@ -29,6 +29,9 @@ const fetchGraficoData = async (tiempoFiltro: string, tipoFiltro: string) => {
 const DashboardChart: React.FC = () => {
   const { tiempoFiltro, tipoFiltro } = useFiltro();
   const [chartData, setChartData] = useState<any[]>([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["grafico", tiempoFiltro, tipoFiltro],
@@ -99,7 +102,6 @@ const DashboardChart: React.FC = () => {
         break;
 
       case tiempoFiltro === "YTD/YTG" && tipoFiltro.includes("Dinero"):
-        
         setChartData([]); 
         return; 
 
@@ -139,31 +141,67 @@ const DashboardChart: React.FC = () => {
       ? { clientesNuevos: "#2DCF5A", compraron: "#358DEB" }
       : { clientesNuevos: "#EB7635", compraron: "#3B82F6" };
 
+  // Calculate dynamic dimensions based on screen size
+  const getChartDimensions = () => {
+    if (isMobile) {
+      return { width: '100%', height: 300, barSize: 20 };
+    } else if (isTablet) {
+      return { width: '100%', height: 380, barSize: 40 };
+    } else {
+      return { width: 948, height: 420, barSize: 80 };
+    }
+  };
+
+  const { width, height, barSize } = getChartDimensions();
+
   return (
-    <Box sx={{ textAlign: "center", width: "1042px", height: "456px" }}>
+    <Box sx={{ 
+      textAlign: "center", 
+      width: { xs: "100%", sm: "100%", md: "1042px" }, 
+      height: { xs: "auto", sm: "auto", md: "456px" },
+      padding: { xs: 2, sm: 2, md: 0 }
+    }}>
       {isYtdYtgActive ? (
-        <GraficYTG  />
+        <GraficYTG />
       ) : (
-        <ResponsiveContainer width={948} height={420}>
-          <BarChart data={chartData} barSize={80}>
+        <ResponsiveContainer width="100%" height={height}>
+          <BarChart 
+            data={chartData} 
+            barSize={barSize}
+            margin={{ 
+              top: 5, 
+              right: isMobile ? 10 : 30, 
+              left: isMobile ? 0 : 20, 
+              bottom: isMobile ? 60 : 20 
+            }}
+          >
             <CartesianGrid
-                            horizontal={true}
-                            vertical={false}
-                            stroke="#ccc"
-                            strokeDasharray="1 1"
-                          />
-            <XAxis dataKey={isToday ? "hora" : "dia"} />
+              horizontal={true}
+              vertical={false}
+              stroke="#ccc"
+              strokeDasharray="1 1"
+            />
+            <XAxis 
+              dataKey={isToday ? "hora" : "dia"} 
+              angle={isMobile ? -45 : 0}
+              textAnchor={isMobile ? "end" : "middle"}
+              height={isMobile ? 60 : 30}
+              interval={isMobile ? 1 : 0}
+              fontSize={isMobile ? 10 : 12}
+            />
             <YAxis
               domain={["dataMin", "dataMax"]}
               ticks={
                 isToday
-                  ? [0, 5, 8, 10, 20, 40, 60, 80, 100]
-                  : [100, 200, 400, 600, 800, 1000, 1500, 2000, 2500]
+                  ? isMobile ? [0, 20, 60, 100] : [0, 5, 8, 10, 20, 40, 60, 80, 100]
+                  : isMobile ? [200, 1000, 2000] : [100, 200, 400, 600, 800, 1000, 1500, 2000, 2500]
               }
               tickMargin={15}
               interval="preserveStartEnd"
+              fontSize={isMobile ? 10 : 12}
+              width={isMobile ? 35 : 50}
             />
-            {isTransactionActive && (
+            {isTransactionActive && !isMobile && (
               <YAxis
                 domain={["dataMin", "dataMax"]}
                 yAxisId="right"
@@ -175,16 +213,26 @@ const DashboardChart: React.FC = () => {
                   500000, 750000, 1000000, 2000000, 4000000, 6000000, 8000000,
                   10000000, 15000000,
                 ]}
+                fontSize={12}
               />
             )}
 
             <Tooltip />
-            <Legend />
+            <Legend 
+              wrapperStyle={{
+                fontSize: isMobile ? 10 : 12,
+                marginTop: isMobile ? 10 : 0,
+                paddingTop: isMobile ? 10 : 0
+              }}
+              layout={isMobile ? "horizontal" : "horizontal"}
+              verticalAlign={isMobile ? "bottom" : "bottom"}
+              align="center"
+            />
             {!isTransactionActive && (
               <>
                 <Bar
                   dataKey=""
-                  fill={barColors.compraron}
+                  fill='#f6bfbf'
                   name="Clientes Totales"
                 />
                 <Bar
@@ -200,7 +248,7 @@ const DashboardChart: React.FC = () => {
                 />
                 <Bar
                   dataKey=""
-                  fill={barColors.clientesNuevos}
+                  fill='#caf8d7'
                   name="No Compraron"
                 />
               </>
@@ -209,8 +257,8 @@ const DashboardChart: React.FC = () => {
               type="monotone"
               dataKey="monto"
               stroke="#D81B60"
-              strokeWidth={4}
-              yAxisId="right"
+              strokeWidth={isMobile ? 2 : 4}
+              yAxisId={isMobile ? "left" : "right"}
               name=""
             />
             {isTransactionActive && (
@@ -223,19 +271,24 @@ const DashboardChart: React.FC = () => {
           </BarChart>
         </ResponsiveContainer>
       )}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+      <Box sx={{ 
+        display: "flex", 
+        justifyContent: "flex-end", 
+        mt: 2,
+        px: { xs: 1, sm: 2, md: 2 }
+      }}>
         <Link
           href="/"
           sx={{
             color: "#644BBA",
             textDecoration: "none",
-            fontSize: "14px",
+            fontSize: { xs: "12px", sm: "14px" },
             fontWeight: "bold",
             display: "flex",
             alignItems: "center",
           }}
         >
-          <DownloadIcon sx={{ mr: 1 }} /> Exportar tabla
+          <DownloadIcon sx={{ mr: 1, fontSize: { xs: 16, sm: 20 } }} /> Exportar tabla
         </Link>
       </Box>
     </Box>
