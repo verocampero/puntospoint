@@ -1,13 +1,16 @@
 import React from "react";
-import { Button, Box } from "@mui/material";
+import { Button, Box, useTheme, useMediaQuery } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-import { useFiltro } from "./FiltroContext";
+import { useFiltro } from "../Context/FiltroContext";
 
 const Buttons: React.FC = () => {
   const { tipoFiltro, setTipoFiltro } = useFiltro() as {
     tipoFiltro: string[];
     setTipoFiltro: React.Dispatch<React.SetStateAction<string[]>>;
   };
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const listTipo = [
     { text: "Clientes", icon: null },
@@ -40,9 +43,10 @@ const Buttons: React.FC = () => {
   return (
     <Box
       display="flex"
-      sx={{ justifyContent: "space-between", marginBottom: "30px" }}
+      flexDirection={isMobile ? "column" : "row"}
+      sx={{ justifyContent: "space-between", marginBottom: "30px", gap: isMobile ? "8px" : "0" }}
     >
-      <Box sx={{ display: "flex", gap: "8px" }}>
+      <Box sx={{ display: "flex", gap: "8px", flexDirection: isMobile ? "column" : "row" }}>
         {listTipo
           .filter((item) => item.text === "Clientes" || item.text === "Transacciones")
           .map((item) => (
@@ -55,6 +59,7 @@ const Buttons: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: "4px",
+                width: isMobile ? "100%" : "auto",
               }}
               onClick={() => {
                 toggleFiltro(item.text);
@@ -65,7 +70,7 @@ const Buttons: React.FC = () => {
           ))}
       </Box>
 
-      <Box sx={{ display: "flex", gap: "8px" }}>
+      <Box sx={{ display: "flex", gap: "8px", flexDirection: isMobile ? "column" : "row" }}>
         {listTipo
           .filter((item) => item.text === "Dinero" || item.text === "Cashback")
           .map((item) => (
@@ -78,6 +83,7 @@ const Buttons: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: "4px",
+                width: isMobile ? "100%" : "auto",
               }}
               onClick={() => {
                 toggleFiltro(item.text);
