@@ -6,6 +6,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import GradeIcon from '@mui/icons-material/Grade';
 import { useFiltro } from './FiltroContext';
+import GraficYTG from './GraficYTG'
 
 const list = [
   { text: 'Hoy', icon: null },
@@ -19,20 +20,19 @@ const list = [
 ];
 
 export default function Header(props: { window?: () => Window }) {
-  const { tiempoFiltro, setTiempoFiltro } = useFiltro();  // Usamos el hook para obtener y actualizar el filtro
+  const { tiempoFiltro, setTiempoFiltro } = useFiltro();  
   const [activeItem, setActiveItem] = React.useState(list[0]);
 
-  // Sincronizamos activeItem con tiempoFiltro cuando el filtro global cambie
   React.useEffect(() => {
     const filtroActivo = list.find(item => item.text === tiempoFiltro);
     if (filtroActivo) {
       setActiveItem(filtroActivo);
     }
-  }, [tiempoFiltro]); // Se ejecuta cuando tiempoFiltro cambia
+  }, [tiempoFiltro]); 
 
   const handleNavClick = (item: { text: string, icon: React.JSX.Element | null }) => {
-    setActiveItem(item);       // Cambia el estado local de activeItem
-    setTiempoFiltro(item.text); // Cambia el filtro global cuando se hace clic
+    setActiveItem(item);       
+    setTiempoFiltro(item.text); 
   };
 
   return (
