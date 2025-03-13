@@ -14,8 +14,8 @@ Este proyecto es parte de un challenge y consiste en un dashboard de cashback de
 
 1. Clona el repositorio:
    ```sh
-   git clone https://github.com/tu-usuario/tu-repo.git
-   cd tu-repo
+   git clone https://github.com/verocampero/puntospoint.git
+   cd challenge-puntospoint
    ```
 
 2. Instala las dependencias:
