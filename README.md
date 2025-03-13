@@ -11,7 +11,7 @@ Este proyecto es parte de un challenge y consiste en un dashboard de cashback de
 - [TypeScript](https://www.typescriptlang.org/) - Tipado estático para mayor seguridad
 
 
-##Vista Previa _
+## Vista Previa 
 
 ![Captura desde 2025-03-13 14-57-15](https://github.com/user-attachments/assets/4228465b-1221-4040-8859-a91dd4112ed3)
 ![Captura desde 2025-03-13 14-57-08](https://github.com/user-attachments/assets/8d72bba0-16f4-4dff-9998-48e26f463025)
