@@ -1,8 +1,8 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useMemo } from "react";
 
 interface FiltroContextType {
-  tipoFiltro: string[]; // Cambiar a un array de strings
-  setTipoFiltro: (tipo: string[]) => void; // Aceptar un array de filtros
+  tipoFiltro: string[];
+  setTipoFiltro: (tipo: string[]) => void;
   tiempoFiltro: string;
   setTiempoFiltro: (tiempo: string) => void;
 }
@@ -10,12 +10,19 @@ interface FiltroContextType {
 const FiltroContext = createContext<FiltroContextType | undefined>(undefined);
 
 export const FiltroProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Inicializar tipoFiltro como un array vacío
   const [tipoFiltro, setTipoFiltro] = useState<string[]>(["Clientes"]);
   const [tiempoFiltro, setTiempoFiltro] = useState("Hoy");
 
+  // Memoiza el valor del contexto
+  const value = useMemo(() => ({
+    tipoFiltro,
+    setTipoFiltro,
+    tiempoFiltro,
+    setTiempoFiltro,
+  }), [tipoFiltro, tiempoFiltro]);
+
   return (
-    <FiltroContext.Provider value={{ tipoFiltro, setTipoFiltro, tiempoFiltro, setTiempoFiltro }}>
+    <FiltroContext.Provider value={value}>
       {children}
     </FiltroContext.Provider>
   );
