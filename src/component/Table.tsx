@@ -23,6 +23,41 @@ const fetchTransacciones = async () => {
   return data.transacciones;
 };
 
+/**
+ * Componente `CustomTable` que muestra una tabla con datos de transacciones.
+ * Utiliza `useQuery` para obtener los datos de las transacciones desde una API.
+ * 
+ * @returns {JSX.Element} Un componente de tabla que muestra las transacciones.
+ * 
+ * @component
+ * 
+ * @example
+ * // Uso del componente CustomTable
+ * import CustomTable from './Table';
+ * 
+ * function App() {
+ *   return (
+ *     <div>
+ *       <CustomTable />
+ *     </div>
+ *   );
+ * }
+ * 
+ * @remarks
+ * - Muestra un indicador de carga (`CircularProgress`) mientras se obtienen los datos.
+ * - Muestra un mensaje de error (`Typography`) si ocurre un error al cargar los datos.
+ * - La tabla se adapta a dispositivos móviles utilizando `useMediaQuery` y `useTheme`.
+ * - La tabla tiene un ancho mínimo en dispositivos móviles para permitir el desplazamiento horizontal.
+ * 
+ * @hook
+ * - `useQuery` para obtener los datos de las transacciones.
+ * - `useTheme` para obtener el tema actual.
+ * - `useMediaQuery` para detectar si el dispositivo es móvil.
+ * 
+ * @dependencies
+ * - `@mui/material`: Componentes de Material-UI.
+ * - `react-query`: Para la gestión de datos asíncronos.
+ */
 export default function CustomTable() {
   const { data, isLoading, error } = useQuery<
     { hora: string; columnas: number[]; total: number }[]

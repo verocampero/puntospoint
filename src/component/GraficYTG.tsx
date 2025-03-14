@@ -20,6 +20,31 @@ const fetchData = async () => {
   return response.json();
 };
 
+/**
+ * YtdYtgChart es un componente funcional de React que renderiza dos gráficos de barras
+ * utilizando datos obtenidos de una consulta. Muestra datos de Año Hasta la Fecha (YTD) y 
+ * Año Por Venir (YTG) para diferentes años.
+ *
+ * @componente
+ * @returns {JSX.Element} El componente renderizado.
+ *
+ * @ejemplo
+ * // Ejemplo de uso
+ * <YtdYtgChart />
+ *
+ * @observaciones
+ * Este componente utiliza el hook `useQuery` para obtener datos y muestra estados de carga
+ * y error en consecuencia. También utiliza los hooks `useTheme` y `useMediaQuery` de Material-UI
+ * para manejar el diseño responsivo.
+ *
+ * @dependencias
+ * - `useQuery` de `react-query` para la obtención de datos.
+ * - `useTheme` y `useMediaQuery` de `@mui/material` para el diseño responsivo.
+ * - `ResponsiveContainer`, `BarChart`, `CartesianGrid`, `XAxis`, `YAxis`, 
+ *   `Tooltip`, `Legend`, y `Bar` de `recharts` para la renderización de gráficos.
+ *
+ * @returns {JSX.Element} El componente renderizado.
+ */
 const YtdYtgChart: React.FC = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["ytd-ytg-data"],
