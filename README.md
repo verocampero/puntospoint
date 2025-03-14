@@ -49,20 +49,7 @@ npm run dev
 # o
 yarn dev
 ```
-## Levantar la Documentación
 
-Usar un servidor estático como http-server:
-
-Instala http-server:
-```sh
-npm install -g http-server
-```
-Navega a la carpeta docs/ y ejecuta:
-```sh
-
-http-server docs
-```
-Luego, abre en tu navegador http://localhost:8080 (o el puerto indicado en la terminal).
 
 El servidor estará disponible en `http://localhost:3000`.
 
