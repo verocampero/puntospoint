@@ -1,0 +1,8 @@
+{
+    "entryPoints": ["src/component/**/*.tsx"], 
+    "out": "docs", 
+    "exclude": ["**/node_modules/**"], 
+    "includeVersion": true, 
+    "name": "Mi Proyecto", 
+    "readme": "README.md" 
+  }

@@ -12,6 +12,14 @@ const Buttons: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  /**
+   * Lista de tipos con texto e icono.
+   * 
+   * @constant
+   * @type {Array<{ text: string, icon: any }>}
+   * @property {string} text - El texto que describe el tipo.
+   * @property {any} icon - El icono asociado al tipo (actualmente null).
+   */
   const listTipo = [
     { text: "Clientes", icon: null },
     { text: "Transacciones", icon: null },

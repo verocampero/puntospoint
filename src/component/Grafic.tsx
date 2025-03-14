@@ -1,3 +1,32 @@
+/**
+ * Componente `DashboardChart` que muestra un gráfico de barras utilizando la librería `recharts`.
+ * El gráfico se adapta a diferentes tamaños de pantalla y muestra datos basados en los filtros seleccionados.
+ *
+ * @component
+ * @returns {JSX.Element} El componente `DashboardChart`.
+ *
+ * @example
+ * <DashboardChart />
+ *
+ * @remarks
+ * Este componente utiliza `useQuery` de `@tanstack/react-query` para obtener datos del gráfico desde una API.
+ * Los datos se actualizan automáticamente cuando cambian los filtros `tiempoFiltro` y `tipoFiltro`.
+ *
+ * @description
+ * El componente `DashboardChart` muestra un gráfico de barras que se adapta a diferentes tamaños de pantalla (móvil, tablet, escritorio).
+ * Los datos del gráfico se obtienen de una API basada en los filtros seleccionados (`tiempoFiltro` y `tipoFiltro`).
+ * Dependiendo de los filtros, el gráfico muestra diferentes conjuntos de datos y colores de barras.
+ *
+ * @returns {JSX.Element} El componente `DashboardChart`.
+ *
+ * @throws {Error} Si hay un error al obtener los datos del gráfico.
+ *
+ * @see {@link https://recharts.org/en-US/api/BarChart} Para más información sobre `BarChart` de `recharts`.
+ * @see {@link https://react-query.tanstack.com/} Para más información sobre `react-query`.
+ *
+ * @requires {@link https://mui.com/} Para componentes de Material-UI.
+ * @requires {@link https://reactjs.org/} Para componentes de React.
+ */
 import React, { useState, useEffect } from "react";
 import {
   BarChart,

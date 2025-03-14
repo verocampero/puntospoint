@@ -30,6 +30,46 @@ const daysList = [
   { text: 'Domingo', icon: null },
 ];
 
+/**
+ * Componente Header que muestra un encabezado con opciones de filtro y navegación.
+ * 
+ * @param {Object} props - Propiedades del componente.
+ * @param {Function} [props.window] - Función opcional que devuelve el objeto Window.
+ * 
+ * @returns {JSX.Element | null} - Retorna el componente Header o null si no está en el cliente.
+ * 
+ * @component
+ * 
+ * @example
+ * // Uso del componente Header
+ * <Header window={window} />
+ * 
+ * @remarks
+ * Este componente utiliza hooks de React para manejar el estado y efectos secundarios.
+ * También utiliza Material-UI para el diseño y los estilos.
+ * 
+ * @description
+ * El componente Header permite seleccionar un filtro de tiempo y un día específico (si el filtro es '7D').
+ * Se adapta a dispositivos móviles y de escritorio, mostrando un menú desplegable en móviles y botones en escritorio.
+ * 
+ * @hook
+ * - useFiltro: Hook personalizado para manejar el filtro de tiempo.
+ * - useTheme: Hook de Material-UI para acceder al tema actual.
+ * - useMediaQuery: Hook de Material-UI para manejar consultas de medios.
+ * 
+ * @state
+ * - {boolean} isClient - Estado para verificar si el componente se renderiza en el cliente.
+ * - {Object} activeItem - Estado para el elemento de filtro activo.
+ * - {Object} activeDay - Estado para el día activo (si el filtro es '7D').
+ * 
+ * @effect
+ * - Efecto para establecer `isClient` a `true` cuando el componente se monta.
+ * - Efecto para actualizar `activeItem` cuando `tiempoFiltro` cambia.
+ * 
+ * @function
+ * - handleNavClick: Maneja el clic en un elemento de navegación y actualiza el filtro de tiempo.
+ * - handleDayClick: Maneja el clic en un día y actualiza el día activo.
+ */
 export default function Header(props: { window?: () => Window }) {
   const { tiempoFiltro, setTiempoFiltro } = useFiltro();  
   const [activeItem, setActiveItem] = React.useState(list[0]); 

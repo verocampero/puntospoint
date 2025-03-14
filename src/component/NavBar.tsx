@@ -22,6 +22,43 @@ interface Props {
 const drawerWidth = 240;
 const navItems = ['Dashboard', 'Clientes', 'Reglas de Acumulación'];
 
+/**
+ * Componente `DrawerAppBar` que representa una barra de navegación con un menú desplegable.
+ * 
+ * @param {Props} props - Las propiedades del componente.
+ * @param {Object} props.window - Objeto ventana para manejar el contenedor del Drawer.
+ * 
+ * @returns {JSX.Element} El componente `DrawerAppBar`.
+ * 
+ * @component
+ * 
+ * @example
+ * // Uso del componente DrawerAppBar
+ * import DrawerAppBar from './NavBar';
+ * 
+ * const navItems = ['Inicio', 'Servicios', 'Contacto'];
+ * 
+ * function App() {
+ *   return (
+ *     <DrawerAppBar window={window} />
+ *   );
+ * }
+ * 
+ * export default App;
+ * 
+ * @description
+ * Este componente crea una barra de navegación que incluye un menú desplegable para dispositivos móviles.
+ * Utiliza Material-UI para el diseño y estilo de los componentes.
+ * 
+ * @property {boolean} mobileOpen - Estado que controla si el menú desplegable está abierto o cerrado.
+ * @property {string} activeItem - Estado que guarda el elemento de navegación actualmente activo.
+ * 
+ * @function handleDrawerToggle - Función que alterna el estado de `mobileOpen`.
+ * @function handleNavClick - Función que establece el elemento de navegación activo.
+ * 
+ * @constant {JSX.Element} drawer - Elemento JSX que representa el menú desplegable.
+ * @constant {Function} container - Función que devuelve el contenedor del Drawer.
+ */
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);

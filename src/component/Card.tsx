@@ -1,3 +1,52 @@
+/**
+ * Interfaz que representa la estructura de un cliente.
+ * @interface Cliente
+ * @property {string} mes - Mes correspondiente a los datos del cliente.
+ * @property {number} total - Total de clientes.
+ * @property {number} ventas - Número de ventas realizadas.
+ * @property {number} monto - Monto total de las ventas.
+ * @property {Object} cashback - Información del cashback.
+ * @property {number} cashback.acumulado - Cashback acumulado.
+ * @property {number[]} cashback.facturado - Montos facturados.
+ * @property {string[]} cashback.fechasFacturacion - Fechas de facturación.
+ */
+
+/**
+ * Interfaz que representa la estructura de una transacción.
+ * @interface Transaccion
+ * @property {string} hora - Hora de la transacción.
+ * @property {number} total - Total de la transacción.
+ * @property {number[]} columnas - Columnas de la transacción.
+ */
+
+/**
+ * Interfaz que representa la estructura de un gráfico.
+ * @interface Grafico
+ * @property {string[]} horas - Horas del gráfico.
+ * @property {number[]} clientes_nuevos - Número de clientes nuevos.
+ * @property {number[]} compraron - Número de clientes que compraron.
+ */
+
+/**
+ * Interfaz que representa la estructura de los datos.
+ * @interface Data
+ * @property {Cliente[]} clientes - Lista de clientes.
+ * @property {Transaccion[]} transacciones - Lista de transacciones.
+ * @property {Grafico} grafico - Datos del gráfico.
+ */
+
+/**
+ * Función asíncrona para obtener los datos desde la API.
+ * @function fetchData
+ * @returns {Promise<Data>} - Promesa que resuelve con los datos obtenidos.
+ * @throws {Error} - Error si no se pueden obtener los datos.
+ */
+
+/**
+ * Componente de React que muestra el dashboard de cashback.
+ * @component
+ * @returns {JSX.Element} - Elemento JSX que representa el dashboard de cashback.
+ */
 import React from "react";
 import { Card, CardContent, Box, Typography} from "@mui/material";
 import { useQuery } from '@tanstack/react-query';
