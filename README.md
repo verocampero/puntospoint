@@ -49,58 +49,19 @@ npm run dev
 # o
 yarn dev
 ```
+## Levantar la Documentación
 
-# Documentación con TypeDoc
+Usar un servidor estático como http-server:
 
-Este proyecto utiliza [TypeDoc](https://typedoc.org/) para generar documentación a partir del código TypeScript.
+Instala http-server:
 
-## Instalación
+npm install -g http-server
 
-Asegúrate de tener Node.js instalado en tu sistema. Luego, instala TypeDoc como una dependencia de desarrollo:
+Navega a la carpeta docs/ y ejecuta:
 
-```sh
-npm install --save-dev typedoc
-```
+http-server docs
 
-## Generar la Documentación
-
-Para generar la documentación, ejecuta el siguiente comando en la terminal:
-
-```sh
-npx typedoc
-```
-
-Esto generará una carpeta `docs/` con los archivos HTML de la documentación.
-
-## Configuración Opcional
-
-Puedes personalizar la generación de la documentación agregando un archivo `typedoc.json` en la raíz del proyecto:
-
-```json
-{
-  "entryPoints": ["src/index.ts"],
-  "out": "docs",
-  "includeVersion": true
-}
-```
-
-## Ver la Documentación
-
-Una vez generada, puedes abrir el archivo `docs/index.html` en tu navegador para ver la documentación.
-
-## Limpieza de Documentación Anterior
-
-Si deseas eliminar la documentación generada previamente antes de regenerarla, puedes usar:
-
-```sh
-rm -rf docs && npx typedoc
-```
-
----
-
-Para más información, consulta la [documentación oficial de TypeDoc](https://typedoc.org/).
-
-
+Luego, abre en tu navegador http://localhost:8080 (o el puerto indicado en la terminal).
 
 El servidor estará disponible en `http://localhost:3000`.
 
